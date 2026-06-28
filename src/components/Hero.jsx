@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Calendar, Star, ShieldCheck, HeartPulse, Award } from 'lucide-react';
+import clinicHero from '../assets/clinic-hero.png';
 
 export default function Hero() {
   const containerVariants = {
@@ -153,7 +154,7 @@ export default function Hero() {
           <div className="relative rounded-[2.5rem] overflow-hidden w-full max-w-[440px] aspect-[4/5] shadow-premium z-10 border border-white/20">
             <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent z-10 mix-blend-multiply" />
             <img 
-              src="assets/clinic-hero.png" 
+              src={clinicHero} 
               alt="Dr. Khushwaha's Dental Clinic Modern Interior - Reception Area in Nalasopara East"
               loading="eager"
               className="w-full h-full object-cover transition-transform duration-[4s] hover:scale-105"

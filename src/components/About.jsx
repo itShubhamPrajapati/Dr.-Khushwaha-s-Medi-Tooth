@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Award, ShieldAlert, Sparkles, CheckCircle2, FlaskConical, Stethoscope } from 'lucide-react';
+import drSangya from '../assets/dr-sangya.png';
 
 export default function About() {
   const cardRef = useRef(null);
@@ -68,7 +69,7 @@ export default function About() {
               {/* Doctor Portrait with Glass border */}
               <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-white/80 shadow-glass-lg mb-6 relative z-10 shrink-0 mt-4">
                 <img 
-                  src="assets/dr-sangya.png" 
+                  src={drSangya} 
                   alt="Dr. Sangya Khushwaha - B.D.S, Fellowship in Advance Aesthetic Dentistry (F.A.A.D), Dentist in Nalasopara East" 
                   loading="lazy"
                   className="w-full h-full object-cover"
