@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    background-color: #FAFAFA;
+    color: #0A1128;
+    overflow-x: hidden;
+  }
+
+  /* Custom high-end scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(10, 17, 40, 0.03);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(10, 17, 40, 0.15);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(10, 17, 40, 0.3);
+  }
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-panel-dark {
+  background: rgba(10, 17, 40, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 10px 30px -10px rgba(10, 17, 40, 0.04),
+    0 1px 1px 0 rgba(255, 255, 255, 0.3) inset;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 20px 40px -15px rgba(10, 17, 40, 0.08),
+    0 1px 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(10, 17, 40, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: #1C77C3;
+  box-shadow: 0 0 0 4px rgba(28, 119, 195, 0.15);
+}
+
+/* Floating Animations for Premium Background Mesh */
+@keyframes float-slow-1 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, -60px) scale(1.1); }
+  66% { transform: translate(-30px, 30px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes float-slow-2 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  50% { transform: translate(-50px, 50px) scale(1.15); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes float-slow-3 {
+  0% { transform: translate(0px, 0px) scale(1); }
+  40% { transform: translate(50px, 20px) scale(0.95); }
+  80% { transform: translate(-20px, -40px) scale(1.05); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob-1 {
+  animation: float-slow-1 25s infinite ease-in-out;
+}
+
+.animate-blob-2 {
+  animation: float-slow-2 20s infinite ease-in-out;
+}
+
+.animate-blob-3 {
+  animation: float-slow-3 28s infinite ease-in-out;
+}
+
+/* Custom 3D card tilt values */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Leaflet Map overrides for premium feel */
+.leaflet-container {
+  border-radius: 1.5rem;
+  font-family: inherit;
+}
+
+.leaflet-bar {
+  border: none !important;
+  box-shadow: 0 8px 32px 0 rgba(10, 17, 40, 0.08) !important;
+}
+
+.leaflet-bar a {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(8px);
+  color: #0A1128 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.2s ease;
+}
+
+.leaflet-bar a:hover {
+  background-color: #ffffff !important;
+  color: #1C77C3 !important;
+}
+
+/* Custom animated icon stroke drawing */
+@keyframes draw-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-draw {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw-stroke 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
