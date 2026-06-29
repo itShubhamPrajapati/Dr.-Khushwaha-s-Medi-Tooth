@@ -8,6 +8,7 @@ import AppointmentForm from './components/AppointmentForm';
 import MapAndHours from './components/MapAndHours';
 import Footer from './components/Footer';
 import StickyMobileBar from './components/StickyMobileBar';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 export default function App() {
   return (
@@ -27,6 +28,9 @@ export default function App() {
 
       {/* Global Brand Footer */}
       <Footer />
+
+      {/* Global Floating WhatsApp Widget */}
+      <FloatingWhatsApp />
 
       {/* Sticky Call & WhatsApp Overlay on Mobile */}
       <StickyMobileBar />

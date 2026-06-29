@@ -122,7 +122,13 @@ export default function Reviews() {
       {/* Light decorative gradient blob */}
       <div className="absolute top-10 left-10 w-[300px] h-[300px] rounded-full bg-accent-gold/5 blur-[90px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 relative z-10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -239,7 +245,7 @@ export default function Reviews() {
           ))}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

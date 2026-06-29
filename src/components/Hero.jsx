@@ -99,10 +99,11 @@ export default function Hero() {
               href="#booking"
               onClick={(e) => handleCTA(e, 'booking')}
               aria-label="Scroll to the secure appointment booking form"
-              className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary transition-all duration-300 shadow-premium hover:shadow-accent-glow hover:-translate-y-[2px] min-h-[48px]"
+              className="group flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary transition-all duration-300 shadow-premium hover:shadow-accent-glow hover:-translate-y-[2px] min-h-[48px]"
             >
               <Calendar className="w-4.5 h-4.5" />
-              Book Appointment
+              <span className="transition-transform duration-300 group-hover:translate-x-0.5">Book Appointment</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1.5 font-sans font-normal">→</span>
             </a>
             <a
               href="tel:08600874016"

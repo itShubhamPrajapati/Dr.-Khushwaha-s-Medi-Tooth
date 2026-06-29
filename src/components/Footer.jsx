@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, Phone, MessageSquare, Mail, MapPin } from 'lucide-react';
+import { Shield, Phone, MessageSquare, Mail, MapPin, Instagram, Facebook, MessageCircle } from 'lucide-react';
 
 export default function Footer() {
   const handleLinkClick = (e, targetId) => {
@@ -46,23 +46,34 @@ export default function Footer() {
               Providing expert aesthetic and clinical dental solutions in Vasai-Virar, Mumbai. Trust, rigorous sterilization, and state-of-the-art dental procedures shape our daily patient care protocols.
             </p>
             
-            {/* Quick Contact Icons */}
-            <div className="flex gap-3">
+            {/* Quick Contact & Social Icons */}
+            <div className="flex gap-3.5 mt-4">
               <a 
                 href="https://wa.me/918600874016" 
                 target="_blank" 
                 rel="noreferrer"
-                className="w-12 h-12 rounded-xl bg-white/5 hover:bg-secondary flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 border border-white/10"
+                className="w-11 h-11 rounded-xl bg-white/5 hover:bg-[#25D366] hover:scale-110 flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 border border-white/10 shadow-glass"
                 aria-label="Chat on WhatsApp with Dr. Khushwaha's dental clinic"
               >
-                <MessageSquare className="w-5 h-5" />
+                <MessageCircle className="w-5 h-5" />
               </a>
               <a 
-                href="tel:08600874016" 
-                className="w-12 h-12 rounded-xl bg-white/5 hover:bg-secondary flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 border border-white/10"
-                aria-label="Call Dr. Khushwaha's dental clinic at 08600874016"
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="w-11 h-11 rounded-xl bg-white/5 hover:bg-gradient-to-tr hover:from-[#f9ce34] hover:via-[#ee2a7b] hover:to-[#6228d7] hover:scale-110 flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 border border-white/10 shadow-glass"
+                aria-label="Follow Dr. Khushwaha's dental clinic on Instagram"
               >
-                <Phone className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noreferrer"
+                className="w-11 h-11 rounded-xl bg-white/5 hover:bg-[#1877F2] hover:scale-110 flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 border border-white/10 shadow-glass"
+                aria-label="Follow Dr. Khushwaha's dental clinic on Facebook"
+              >
+                <Facebook className="w-5 h-5" />
               </a>
             </div>
           </div>

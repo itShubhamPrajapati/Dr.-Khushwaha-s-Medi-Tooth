@@ -181,7 +181,13 @@ export default function AppointmentForm() {
       <div className="absolute top-10 right-10 w-[450px] h-[450px] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[400px] h-[400px] rounded-full bg-accent-teal/5 blur-[110px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 relative z-10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           
@@ -191,7 +197,7 @@ export default function AppointmentForm() {
               Appointment Booking
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold font-serif text-primary leading-tight mb-6">
-              Secure Your Smiler Consultation
+              Secure Your Smile Consultation
             </h2>
             <p className="text-base text-primary/70 leading-relaxed font-sans font-light mb-10">
               Submit your preferred date and time shift to reserve your visit slot. Our administrative staff will run security verification and call or message you to finalize scheduling within an hour.
@@ -336,9 +342,9 @@ export default function AppointmentForm() {
                           value={formData.Name}
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          className={`block w-full px-4 pt-6 pb-2 text-sm text-primary bg-white/40 border ${
+                          className={`block w-full px-5 pt-6 pb-2 text-sm text-primary bg-white/45 border ${
                             errors.Name ? 'border-red-500 focus:border-red-500' : 'border-primary/10 focus:border-secondary'
-                          } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[46px]`}
+                          } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[48px] hover:border-primary/25`}
                           placeholder=" "
                           required
                           aria-required="true"
@@ -347,7 +353,7 @@ export default function AppointmentForm() {
                         />
                         <label
                           htmlFor="form-Name"
-                          className="absolute text-xs sm:text-sm text-primary/45 duration-300 transform -translate-y-3 scale-85 top-4 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-85 peer-focus:-translate-y-3 peer-focus:text-secondary font-medium"
+                          className="absolute text-xs sm:text-sm text-primary/45 duration-350 ease-out transform -translate-y-3.5 scale-90 top-5 left-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-3.5 peer-focus:text-secondary font-medium pointer-events-none"
                         >
                           Full Name *
                         </label>
@@ -372,9 +378,9 @@ export default function AppointmentForm() {
                             value={formData.Phone}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className={`block w-full px-4 pt-6 pb-2 text-sm text-primary bg-white/40 border ${
+                            className={`block w-full px-5 pt-6 pb-2 text-sm text-primary bg-white/45 border ${
                               errors.Phone ? 'border-red-500 focus:border-red-500' : 'border-primary/10 focus:border-secondary'
-                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[46px]`}
+                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[48px] hover:border-primary/25`}
                             placeholder=" "
                             required
                             aria-required="true"
@@ -383,7 +389,7 @@ export default function AppointmentForm() {
                           />
                           <label
                             htmlFor="form-Phone"
-                            className="absolute text-xs sm:text-sm text-primary/45 duration-300 transform -translate-y-3 scale-85 top-4 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-85 peer-focus:-translate-y-3 peer-focus:text-secondary font-medium"
+                            className="absolute text-xs sm:text-sm text-primary/45 duration-350 ease-out transform -translate-y-3.5 scale-90 top-5 left-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-3.5 peer-focus:text-secondary font-medium pointer-events-none"
                           >
                             Phone Number *
                           </label>
@@ -406,9 +412,9 @@ export default function AppointmentForm() {
                             value={formData.Email}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className={`block w-full px-4 pt-6 pb-2 text-sm text-primary bg-white/40 border ${
+                            className={`block w-full px-5 pt-6 pb-2 text-sm text-primary bg-white/45 border ${
                               errors.Email ? 'border-red-500 focus:border-red-500' : 'border-primary/10 focus:border-secondary'
-                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[46px]`}
+                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[48px] hover:border-primary/25`}
                             placeholder=" "
                             required
                             aria-required="true"
@@ -417,7 +423,7 @@ export default function AppointmentForm() {
                           />
                           <label
                             htmlFor="form-Email"
-                            className="absolute text-xs sm:text-sm text-primary/45 duration-300 transform -translate-y-3 scale-85 top-4 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-85 peer-focus:-translate-y-3 peer-focus:text-secondary font-medium"
+                            className="absolute text-xs sm:text-sm text-primary/45 duration-350 ease-out transform -translate-y-3.5 scale-90 top-5 left-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-3.5 peer-focus:text-secondary font-medium pointer-events-none"
                           >
                             Email Address *
                           </label>
@@ -444,9 +450,9 @@ export default function AppointmentForm() {
                             value={formData.Date}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className={`block w-full px-4 pt-6 pb-2 text-sm text-primary bg-white/40 border ${
+                            className={`block w-full px-5 pt-6 pb-2 text-sm text-primary bg-white/45 border ${
                               errors.Date ? 'border-red-500 focus:border-red-500' : 'border-primary/10 focus:border-secondary'
-                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[46px]`}
+                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 min-h-[48px] hover:border-primary/25`}
                             required
                             aria-required="true"
                             aria-invalid={errors.Date ? "true" : "false"}
@@ -454,7 +460,7 @@ export default function AppointmentForm() {
                           />
                           <label
                             htmlFor="form-Date"
-                            className="absolute text-xs text-secondary top-2 left-4 z-10 font-semibold"
+                            className="absolute text-[10px] sm:text-xs font-bold uppercase tracking-wider text-secondary top-2 left-5 z-10"
                           >
                             Preferred Date *
                           </label>
@@ -476,9 +482,9 @@ export default function AppointmentForm() {
                             value={formData.TimeSlot}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className={`block w-full px-4 pt-6 pb-2 text-sm text-primary bg-white/40 border ${
+                            className={`block w-full px-5 pt-6 pb-2 text-sm text-primary bg-white/45 border ${
                               errors.TimeSlot ? 'border-red-500 focus:border-red-500' : 'border-primary/10 focus:border-secondary'
-                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 appearance-none min-h-[46px]`}
+                            } rounded-2xl focus:outline-none focus:bg-white/80 peer transition-all duration-300 appearance-none min-h-[48px] hover:border-primary/25`}
                             required
                             aria-required="true"
                             aria-invalid={errors.TimeSlot ? "true" : "false"}
@@ -490,7 +496,7 @@ export default function AppointmentForm() {
                           </select>
                           <label
                             htmlFor="form-TimeSlot"
-                            className="absolute text-xs sm:text-sm text-primary/45 duration-300 transform -translate-y-3 scale-85 top-4 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-85 peer-focus:-translate-y-3 peer-focus:text-secondary font-medium pointer-events-none"
+                            className="absolute text-xs sm:text-sm text-primary/45 duration-350 ease-out transform -translate-y-3.5 scale-90 top-5 left-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-3.5 peer-focus:text-secondary font-medium pointer-events-none"
                           >
                             Preferred Shift *
                           </label>
@@ -515,13 +521,13 @@ export default function AppointmentForm() {
                         rows="3"
                         value={formData.Symptoms}
                         onChange={handleChange}
-                        className="block w-full px-4 pt-6 pb-2 text-sm text-primary bg-white/40 border border-primary/10 rounded-2xl focus:outline-none focus:border-secondary focus:bg-white/80 peer transition-all duration-300 min-h-[80px]"
+                        className="block w-full px-5 pt-6 pb-2 text-sm text-primary bg-white/45 border border-primary/10 rounded-2xl focus:outline-none focus:border-secondary focus:bg-white/80 peer transition-all duration-300 min-h-[80px] hover:border-primary/25"
                         placeholder=" "
                         aria-label="Write symptoms or special dental requirements"
                       />
                       <label
                         htmlFor="form-Symptoms"
-                        className="absolute text-xs sm:text-sm text-primary/45 duration-300 transform -translate-y-3 scale-85 top-4 left-4 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-85 peer-focus:-translate-y-3 peer-focus:text-secondary font-medium"
+                        className="absolute text-xs sm:text-sm text-primary/45 duration-350 ease-out transform -translate-y-3.5 scale-90 top-5 left-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-3.5 peer-focus:text-secondary font-medium pointer-events-none"
                       >
                         Symptoms / Dental Requirements
                       </label>
@@ -544,9 +550,10 @@ export default function AppointmentForm() {
                     <button
                       type="submit"
                       aria-label="Submit secure appointment booking request"
-                      className="w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-premium hover:shadow-accent-glow hover:-translate-y-[1px] active:translate-y-0 transition-all duration-350 min-h-[48px] flex items-center justify-center gap-2.5"
+                      className="group w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-premium hover:shadow-accent-glow hover:-translate-y-[1px] active:translate-y-0 transition-all duration-350 min-h-[48px] flex items-center justify-center gap-2.5"
                     >
-                      <span>Schedule Secure Booking</span>
+                      <span className="transition-transform duration-300 group-hover:translate-x-0.5">Schedule Secure Booking</span>
+                      <span className="transition-transform duration-300 group-hover:translate-x-1.5 font-sans font-normal">→</span>
                     </button>
 
                   </motion.form>
@@ -559,7 +566,7 @@ export default function AppointmentForm() {
 
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -45,7 +45,13 @@ export default function About() {
         <div className="absolute bottom-10 left-10 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[120px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 relative z-10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         
         {/* Asymmetrical Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -57,7 +63,7 @@ export default function About() {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               onMouseEnter={handleMouseEnter}
-              className="relative w-full max-w-[370px] bg-gradient-to-b from-white to-primary/[0.02] border border-white/40 shadow-premium rounded-[2.5rem] p-6 flex flex-col items-center text-center cursor-pointer transition-transform duration-300 transform-style-3d overflow-hidden"
+              className="relative w-full max-w-[370px] bg-gradient-to-b from-white to-primary/[0.02] border border-white/40 hover:border-secondary/30 shadow-premium hover:shadow-[0_10px_40px_-15px_rgba(28,119,195,0.5)] rounded-[2.5rem] p-6 flex flex-col items-center text-center cursor-pointer transition-all duration-300 transform-style-3d overflow-hidden"
               style={{ transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)' }}
               role="article"
               aria-label="Professional profile and qualifications of Dr. Sangya Khushwaha"
@@ -174,7 +180,7 @@ export default function About() {
 
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

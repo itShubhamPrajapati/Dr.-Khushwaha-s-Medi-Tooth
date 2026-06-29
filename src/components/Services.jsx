@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Activity, Sun, Shield, Layers, X, CalendarCheck, Clock, ShieldAlert, Check } from 'lucide-react';
+import BeforeAfterSlider from './BeforeAfterSlider';
 
 export default function Services() {
   const [activeService, setActiveService] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  useEffect(() => {
+    if (activeService) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [activeService]);
 
   const servicesData = [
     {
@@ -23,7 +35,8 @@ export default function Services() {
         'Cosmetic Gingival Contouring',
         'Orthodontic Smile Design Aligners'
       ],
-      postCare: 'Avoid highly pigmenting foods and beverages (coffee, red wine) for 48 hours following composite applications.'
+      postCare: 'Avoid highly pigmenting foods and beverages (coffee, red wine) for 48 hours following composite applications.',
+      hasBeforeAfter: false
     },
     {
       id: 2,
@@ -41,7 +54,10 @@ export default function Services() {
         'Digital Apex Localization',
         'Advanced Fiber Post Reinforcements'
       ],
-      postCare: 'Avoid biting down on hard foods using the treated tooth until the final protective crown has been fixed.'
+      postCare: 'Avoid biting down on hard foods using the treated tooth until the final protective crown has been fixed.',
+      hasBeforeAfter: true,
+      beforeImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=800',
+      afterImage: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800'
     },
     {
       id: 3,
@@ -59,7 +75,10 @@ export default function Services() {
         'Fluoride Enamel Sensitivity Shields',
         'Internal Bleaching for Devitalized Teeth'
       ],
-      postCare: 'Maintain a "white diet" (milk, rice, white meat) for 24 hours, avoiding dark spices like turmeric or soy sauce.'
+      postCare: 'Maintain a "white diet" (milk, rice, white meat) for 24 hours, avoiding dark spices like turmeric or soy sauce.',
+      hasBeforeAfter: true,
+      beforeImage: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800&con=100&sat=10&hue=30&bright=90',
+      afterImage: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800'
     },
     {
       id: 4,
@@ -77,7 +96,10 @@ export default function Services() {
         'Immediate Load Temporary Crowns',
         'Bone Grafting and Sinus Lifts'
       ],
-      postCare: 'Maintain strict oral hygiene using antibacterial mouthwashes and follow soft food eating protocols for the initial week.'
+      postCare: 'Maintain strict oral hygiene using antibacterial mouthwashes and follow soft food eating protocols for the initial week.',
+      hasBeforeAfter: true,
+      beforeImage: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800',
+      afterImage: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800'
     },
     {
       id: 5,
@@ -95,7 +117,8 @@ export default function Services() {
         'Fluoride Treatments for Kids',
         'Sealants for Cavity Prevention'
       ],
-      postCare: 'Brush twice daily, floss once daily, and schedule clinical cleanings every six months to sustain optimal oral hygiene.'
+      postCare: 'Brush twice daily, floss once daily, and schedule clinical cleanings every six months to sustain optimal oral hygiene.',
+      hasBeforeAfter: false
     }
   ];
 
@@ -117,7 +140,13 @@ export default function Services() {
       {/* Background Soft Blobs */}
       <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-accent-teal/5 blur-[120px]" />
       
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 relative z-10"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      >
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -145,7 +174,7 @@ export default function Services() {
             return (
               <motion.div
                 key={service.id}
-                className={`${colSpanClass} rounded-[2rem] p-8 glass-card border border-white/30 cursor-pointer relative overflow-hidden transition-all duration-500`}
+                className={`${colSpanClass} rounded-[2rem] p-8 glass-card border border-white/30 hover:border-secondary/35 hover:-translate-y-2 cursor-pointer relative overflow-hidden transition-all duration-500`}
                 onClick={() => setActiveService(service)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -154,7 +183,6 @@ export default function Services() {
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                whileHover={{ y: -6 }}
                 role="button"
                 tabIndex={0}
                 aria-label={`Explore clinical details and procedures for ${service.title}`}
@@ -190,8 +218,8 @@ export default function Services() {
                 </p>
 
                 <div className="flex items-center gap-2 text-xs font-semibold text-secondary group">
-                  <span>Explore Service details</span>
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-0.5">Explore Service details</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1.5">→</span>
                 </div>
 
                 {/* Aesthetic corner glow */}
@@ -207,43 +235,40 @@ export default function Services() {
           })}
         </div>
 
-        {/* Slide-out Detail Drawer */}
+        {/* Centered Modal with High Z-Index Glassmorphism Backdrop */}
         <AnimatePresence>
           {activeService && (
-            <>
-              {/* Dark transparent glass backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveService(null)}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+            >
+              {/* Modal Container */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setActiveService(null)}
-                className="fixed inset-0 bg-primary/45 backdrop-blur-md z-50 flex justify-end"
-              />
-
-              {/* Slider Drawer */}
-              <motion.div
-                initial={{ x: '100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '100%' }}
-                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                className="fixed top-0 right-0 bottom-0 w-full max-w-[550px] bg-white shadow-premium z-50 border-l border-primary/10 overflow-y-auto"
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-2xl bg-white rounded-[2rem] shadow-premium overflow-hidden flex flex-col max-h-[85vh]"
               >
-                {/* Header Block */}
-                <div className="sticky top-0 bg-white/80 backdrop-blur-md px-8 py-6 border-b border-primary/5 flex items-center justify-between z-10">
-                  <span className="text-xs font-bold uppercase tracking-widest text-primary/50">
+                {/* Persistent/Fixed Close Button */}
+                <button 
+                  onClick={() => setActiveService(null)}
+                  className="absolute top-6 right-6 w-12 h-12 rounded-full bg-primary/5 hover:bg-primary/10 flex items-center justify-center text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-secondary/30 z-50"
+                  aria-label="Close service details"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                {/* Scrollable Inner Container */}
+                <div className="overflow-y-auto p-8 sm:p-10 pr-16 sm:pr-20">
+                  <span className="text-xs font-bold uppercase tracking-widest text-primary/50 block mb-6">
                     Service Blueprint
                   </span>
-                  <button 
-                    onClick={() => setActiveService(null)}
-                    className="w-12 h-12 rounded-full bg-primary/5 hover:bg-primary/10 flex items-center justify-center text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-secondary/30"
-                    aria-label="Close service blueprint drawer"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
 
-                {/* Details Body */}
-                <div className="p-8">
                   {/* Decorative Banner */}
                   <div className={`w-16 h-16 rounded-[1.25rem] bg-gradient-to-tr ${activeService.color} flex items-center justify-center text-white mb-6 shadow-glass`}>
                     <activeService.icon className="w-7 h-7" />
@@ -260,8 +285,22 @@ export default function Services() {
                     {activeService.longDesc}
                   </p>
 
+                  {/* Before & After comparison slider for specific services */}
+                  {activeService.hasBeforeAfter && activeService.beforeImage && activeService.afterImage && (
+                    <div className="mb-8">
+                      <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">
+                        Clinical Before & After Comparison
+                      </h4>
+                      <BeforeAfterSlider 
+                        beforeImage={activeService.beforeImage} 
+                        afterImage={activeService.afterImage} 
+                        serviceName={activeService.title} 
+                      />
+                    </div>
+                  )}
+
                   {/* Highlights Box */}
-                  <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                     <div className="p-4 rounded-2xl bg-primary/[0.02] border border-primary/5 flex items-center gap-3">
                       <Clock className="w-5 h-5 text-secondary shrink-0" />
                       <div>
@@ -310,18 +349,19 @@ export default function Services() {
                   <button
                     onClick={handleBookRedirect}
                     aria-label={`Book a dental consultation for ${activeService.title}`}
-                    className="w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-premium hover:shadow-accent-glow transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
+                    className="group w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-premium hover:shadow-accent-glow transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
                   >
                     <CalendarCheck className="w-4.5 h-4.5" />
-                    Book Service Consultation
+                    <span className="transition-transform duration-300 group-hover:translate-x-0.5">Book Service Consultation</span>
+                    <span className="transition-transform duration-300 group-hover:translate-x-1.5 font-sans font-normal">→</span>
                   </button>
                 </div>
               </motion.div>
-            </>
+            </motion.div>
           )}
         </AnimatePresence>
 
-      </div>
+      </motion.div>
     </section>
   );
 }
