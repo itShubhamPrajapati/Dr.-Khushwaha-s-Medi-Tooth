@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Award, ShieldAlert, Sparkles, CheckCircle2, FlaskConical, Stethoscope } from 'lucide-react';
-import drSangya from '../assets/dr-sangya.png';
+import drSangya from '../assets/dr-sangya.webp';
 
 export default function About() {
   const cardRef = useRef(null);
@@ -45,7 +45,7 @@ export default function About() {
         <div className="absolute bottom-10 left-10 w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[120px]" />
       </div>
 
-      <motion.div 
+      <m.div 
         className="max-w-7xl mx-auto px-6 relative z-10"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -78,6 +78,8 @@ export default function About() {
                   src={drSangya} 
                   alt="Dr. Sangya Khushwaha - B.D.S, Fellowship in Advance Aesthetic Dentistry (F.A.A.D), Dentist in Nalasopara East" 
                   loading="lazy"
+                  width="160"
+                  height="160"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -180,7 +182,7 @@ export default function About() {
 
         </div>
 
-      </motion.div>
+      </m.div>
     </section>
   );
 }

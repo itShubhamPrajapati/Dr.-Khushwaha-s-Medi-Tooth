@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useMotionValue } from 'framer-motion';
+import { m, useMotionValue } from 'framer-motion';
 import { Star, ChevronLeft, ChevronRight, MessageSquareQuote } from 'lucide-react';
 
 export default function Reviews() {
@@ -122,7 +122,7 @@ export default function Reviews() {
       {/* Light decorative gradient blob */}
       <div className="absolute top-10 left-10 w-[300px] h-[300px] rounded-full bg-accent-gold/5 blur-[90px] pointer-events-none" />
 
-      <motion.div 
+      <m.div 
         className="max-w-7xl mx-auto px-6 relative z-10"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -168,7 +168,7 @@ export default function Reviews() {
           ref={carouselRef} 
           className="overflow-hidden cursor-grab active:cursor-grabbing py-6 -my-6 px-4 -mx-4"
         >
-          <motion.div
+          <m.div
             ref={innerTrackRef}
             drag="x"
             dragConstraints={{ right: 0, left: -dragWidth }}
@@ -218,7 +218,7 @@ export default function Reviews() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Carousel Pagination Dots */}
@@ -245,7 +245,7 @@ export default function Reviews() {
           ))}
         </div>
 
-      </motion.div>
+      </m.div>
     </section>
   );
 }

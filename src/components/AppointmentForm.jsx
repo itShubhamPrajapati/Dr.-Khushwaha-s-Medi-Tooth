@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Calendar, Phone, Mail, User, Clock, ShieldCheck, RefreshCw, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function AppointmentForm() {
@@ -102,61 +102,62 @@ export default function AppointmentForm() {
       return;
     }
 
-    // Process submission states
-    setSubmitState('loading');
+    // Trigger reCAPTCHA security simulation
+    setSubmitState('security');
+    
+    setTimeout(() => {
+      // Simulate validation API call
+      setSubmitState('loading');
+      
+      const payload = new URLSearchParams();
+      payload.append('Name', formData.Name);
+      payload.append('Phone', formData.Phone);
+      payload.append('Email', formData.Email);
+      payload.append('Date', formData.Date);
+      payload.append('TimeSlot', formData.TimeSlot);
+      payload.append('Symptoms', formData.Symptoms);
+      payload.append('_captcha', 'false');
+      payload.append('_subject', 'New Appointment Lead - Dr. Khushwaha Dental!');
 
-    // 1. Construct WhatsApp Click-to-Chat Message details
-    const formattedTime = formData.TimeSlot === 'morning' ? 'Morning (10:00 AM - 02:00 PM)' : 'Evening (05:00 PM - 09:00 PM)';
-    const whatsappMsg = `Hello Dr. Khushwaha,\n\n[TESTING MODE] I would like to book a dental appointment.\nName: ${formData.Name}\nPhone: ${formData.Phone}\nDate: ${formData.Date}\nTime: ${formattedTime}\nIssue: ${formData.Symptoms || 'None Specified'}`;
-    const whatsappUrl = `https://wa.me/918600874016?text=${encodeURIComponent(whatsappMsg)}`;
-
-    // 2. Prepare FormSubmit Payload matching requested names
-    const emailData = {
-      Name: formData.Name,
-      Phone: formData.Phone,
-      Email: formData.Email,
-      Date: formData.Date,
-      TimeSlot: formattedTime,
-      Symptoms: formData.Symptoms || 'None Specified',
-      _captcha: 'false',
-      _subject: 'New Appointment Lead - Test Mode!'
-    };
-
-    // 3. AJAX Submission to FormSubmit Endpoint
-    fetch("https://formsubmit.co/ajax/prajapati04092006@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify(emailData)
-    })
-    .then(res => {
-      if (res.ok) {
-        setSubmitState('security');
-        setTimeout(() => {
-          const secureToken = '03AFcWeA7' + Math.random().toString(36).substring(2, 10).toUpperCase();
-          setToken(secureToken);
+      fetch('https://formsubmit.co/ajax/prajapati04092006@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        body: payload.toString()
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success === 'true' || data.success === true) {
+          setToken(Math.random().toString(36).substring(2, 10).toUpperCase());
           setSubmitState('success');
           
-          // Open WhatsApp Click-to-Chat in new tab/window
-          window.open(whatsappUrl, '_blank');
-        }, 1500);
-      } else {
-        throw new Error("FormSubmit server error");
-      }
-    })
-    .catch(err => {
-      console.warn('[Network Notice] AJAX submission failed, utilizing backup redirection. Error:', err);
-      // Fallback local success state
-      setSubmitState('security');
-      setTimeout(() => {
-        const secureToken = 'MOCK-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-        setToken(secureToken);
-        setSubmitState('success');
-        window.open(whatsappUrl, '_blank');
-      }, 1500);
-    });
+          // Trigger automatic whatsapp redirect for active follow-up
+          const formattedMessage = `Hello Dr. Khushwaha's team, I would like to book a dental consultation.\n\n*Details*:\n- *Name*: ${formData.Name}\n- *Phone*: ${formData.Phone}\n- *Preferred Date*: ${formData.Date}\n- *Preferred Shift*: ${formData.TimeSlot === 'morning' ? 'Morning Shift' : 'Evening Shift'}\n- *Symptoms/Dental Needs*: ${formData.Symptoms || 'None Specified'}\n\nI have submitted my form details securely on FormSubmit. Please confirm my appointment.`;
+          
+          const encodedMessage = encodeURIComponent(formattedMessage);
+          const whatsappUrl = `https://wa.me/918600874016?text=${encodedMessage}`;
+          
+          setTimeout(() => {
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+          }, 1500);
+        } else {
+          throw new Error('API reported failure state');
+        }
+      })
+      .catch(err => {
+        console.error('Submission error:', err);
+        setSubmitState('idle');
+        alert('We encountered a temporary network issue. Please re-submit your form details.');
+      });
+
+    }, 1200);
   };
 
   const resetForm = () => {
@@ -181,7 +182,7 @@ export default function AppointmentForm() {
       <div className="absolute top-10 right-10 w-[450px] h-[450px] rounded-full bg-secondary/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[400px] h-[400px] rounded-full bg-accent-teal/5 blur-[110px] pointer-events-none" />
 
-      <motion.div 
+      <m.div 
         className="max-w-7xl mx-auto px-6 relative z-10"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -238,7 +239,7 @@ export default function AppointmentForm() {
                 
                 {/* Form Processing & Security Check State */}
                 {(submitState === 'loading' || submitState === 'security') && (
-                  <motion.div
+                  <m.div
                     key="processing"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -256,12 +257,12 @@ export default function AppointmentForm() {
                         ? 'Transmitting secure reservation details to validation database.' 
                         : 'Loading invisible Google reCAPTCHA v3 shield token for automated spam protection.'}
                     </p>
-                  </motion.div>
+                  </m.div>
                 )}
 
                 {/* Submission Success State */}
                 {submitState === 'success' && (
-                  <motion.div
+                  <m.div
                     key="success"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -298,12 +299,12 @@ export default function AppointmentForm() {
                     >
                       Done
                     </button>
-                  </motion.div>
+                  </m.div>
                 )}
 
                 {/* Form Input State */}
                 {submitState === 'idle' && (
-                  <motion.form
+                  <m.form
                     key="form"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -550,13 +551,13 @@ export default function AppointmentForm() {
                     <button
                       type="submit"
                       aria-label="Submit secure appointment booking request"
-                      className="group w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-premium hover:shadow-accent-glow hover:-translate-y-[1px] active:translate-y-0 transition-all duration-350 min-h-[48px] flex items-center justify-center gap-2.5"
+                      className="group w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-primary to-secondary hover:from-secondary hover:to-primary shadow-premium hover:shadow-accent-glow hover:-translate-y-[1px] active:translate-y-0 transition-all duration-355 min-h-[48px] flex items-center justify-center gap-2.5"
                     >
                       <span className="transition-transform duration-300 group-hover:translate-x-0.5">Schedule Secure Booking</span>
                       <span className="transition-transform duration-300 group-hover:translate-x-1.5 font-sans font-normal">→</span>
                     </button>
 
-                  </motion.form>
+                  </m.form>
                 )}
 
               </AnimatePresence>
@@ -566,7 +567,7 @@ export default function AppointmentForm() {
 
         </div>
 
-      </motion.div>
+      </m.div>
     </section>
   );
 }

@@ -101,6 +101,9 @@ export default function BeforeAfterSlider({ beforeImage, afterImage, serviceName
             alt={`After ${serviceName}`} 
             className="w-full h-full object-cover"
             draggable="false"
+            loading="lazy"
+            width="800"
+            height="500"
           />
           <div className="absolute bottom-4 right-4 bg-accent-teal/95 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-xl shadow-glass-sm z-10 pointer-events-none border border-white/10">
             After
@@ -120,6 +123,9 @@ export default function BeforeAfterSlider({ beforeImage, afterImage, serviceName
             alt={`Before ${serviceName}`} 
             className="w-full h-full object-cover"
             draggable="false"
+            loading="lazy"
+            width="800"
+            height="500"
           />
           <div className="absolute bottom-4 left-4 bg-accent-gold-dark/95 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-xl shadow-glass-sm z-10 pointer-events-none border border-white/10">
             Before

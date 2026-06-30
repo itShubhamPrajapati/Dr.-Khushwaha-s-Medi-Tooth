@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Calendar, Phone, Mail } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -172,17 +172,17 @@ export default function Header() {
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
           >
-            <motion.span
+            <m.span
               animate={isMobileMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
               className={`w-6 h-0.5 rounded-full block transition-colors ${isMobileMenuOpen ? 'bg-white' : 'bg-primary'}`}
             />
-            <motion.span
+            <m.span
               animate={isMobileMenuOpen ? { opacity: 0, x: -10 } : { opacity: 1, x: 0 }}
               transition={{ duration: 0.2 }}
               className={`w-6 h-0.5 rounded-full block transition-colors ${isMobileMenuOpen ? 'bg-white' : 'bg-primary'}`}
             />
-            <motion.span
+            <m.span
               animate={isMobileMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.3 }}
               className={`w-6 h-0.5 rounded-full block transition-colors ${isMobileMenuOpen ? 'bg-white' : 'bg-primary'}`}
@@ -196,7 +196,7 @@ export default function Header() {
         {isMobileMenuOpen && (
           <>
             {/* Dark Frosted Glass Backdrop */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -205,7 +205,7 @@ export default function Header() {
             />
 
             {/* Right-Aligned Luxury Panel */}
-            <motion.div
+            <m.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -213,14 +213,14 @@ export default function Header() {
               className="fixed top-0 right-0 bottom-0 w-[80vw] max-w-[380px] bg-gradient-to-b from-slate-900 to-[#0A1128] border-l border-white/10 shadow-premium z-[9991] md:hidden flex flex-col justify-between p-8 pt-28"
             >
               {/* Menu Links */}
-              <motion.ul 
+              <m.ul 
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
                 className="flex flex-col gap-6 text-left w-full mt-4"
               >
                 {menuItems.map((item) => (
-                  <motion.li key={item.id} variants={itemVariants}>
+                  <m.li key={item.id} variants={itemVariants}>
                     <a
                       href={`#${item.id}`}
                       onClick={(e) => handleLinkClick(e, item.id)}
@@ -232,9 +232,9 @@ export default function Header() {
                     >
                       {item.label}
                     </a>
-                  </motion.li>
+                  </m.li>
                 ))}
-              </motion.ul>
+              </m.ul>
 
               {/* Bottom Card Block */}
               <div className="flex flex-col gap-8 w-full mt-auto border-t border-white/10 pt-8">
@@ -260,7 +260,7 @@ export default function Header() {
                 </div>
 
                 {/* Premium Pulsing/Scaling CTA Button */}
-                <motion.a
+                <m.a
                   href="#booking"
                   onClick={(e) => handleLinkClick(e, 'booking')}
                   className="w-full py-4 rounded-2xl text-sm font-semibold tracking-wide text-white bg-gradient-to-r from-accent-gold-dark via-primary-light to-accent-teal-dark shadow-premium flex items-center justify-center gap-2.5 min-h-[50px]"
@@ -281,9 +281,9 @@ export default function Header() {
                 >
                   <Calendar className="w-4.5 h-4.5 text-accent-gold-light" />
                   <span>Book Appointment</span>
-                </motion.a>
+                </m.a>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

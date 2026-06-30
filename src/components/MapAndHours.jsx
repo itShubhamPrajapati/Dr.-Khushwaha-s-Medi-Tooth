@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import L from 'leaflet';
 import { MapPin, Phone, Mail, Clock, ShieldCheck, MapPinCheck } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 export default function MapAndHours() {
   const [status, setStatus] = useState({ open: false, label: 'Checking Status...' });
@@ -153,7 +153,7 @@ export default function MapAndHours() {
       {/* Background decoration */}
       <div className="absolute top-1/2 left-1/4 w-[350px] h-[350px] rounded-full bg-secondary/5 blur-[100px] pointer-events-none" />
 
-      <motion.div 
+      <m.div 
         className="max-w-7xl mx-auto px-6 relative z-10"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -280,7 +280,7 @@ export default function MapAndHours() {
 
         </div>
 
-      </motion.div>
+      </m.div>
     </section>
   );
 }

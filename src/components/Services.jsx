@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { Sparkles, Activity, Sun, Shield, Layers, X, CalendarCheck, Clock, ShieldAlert, Check } from 'lucide-react';
-import BeforeAfterSlider from './BeforeAfterSlider';
+
+const BeforeAfterSlider = React.lazy(() => import('./BeforeAfterSlider'));
 
 export default function Services() {
   const [activeService, setActiveService] = useState(null);
@@ -56,8 +57,8 @@ export default function Services() {
       ],
       postCare: 'Avoid biting down on hard foods using the treated tooth until the final protective crown has been fixed.',
       hasBeforeAfter: true,
-      beforeImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=800',
-      afterImage: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800'
+      beforeImage: 'https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&q=80&w=800&fm=webp',
+      afterImage: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80&w=800&fm=webp'
     },
     {
       id: 3,
@@ -77,8 +78,8 @@ export default function Services() {
       ],
       postCare: 'Maintain a "white diet" (milk, rice, white meat) for 24 hours, avoiding dark spices like turmeric or soy sauce.',
       hasBeforeAfter: true,
-      beforeImage: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800&con=100&sat=10&hue=30&bright=90',
-      afterImage: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800'
+      beforeImage: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800&con=100&sat=10&hue=30&bright=90&fm=webp',
+      afterImage: 'https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&q=80&w=800&fm=webp'
     },
     {
       id: 4,
@@ -98,8 +99,8 @@ export default function Services() {
       ],
       postCare: 'Maintain strict oral hygiene using antibacterial mouthwashes and follow soft food eating protocols for the initial week.',
       hasBeforeAfter: true,
-      beforeImage: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800',
-      afterImage: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800'
+      beforeImage: 'https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&q=80&w=800&fm=webp',
+      afterImage: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&q=80&w=800&fm=webp'
     },
     {
       id: 5,
@@ -140,7 +141,7 @@ export default function Services() {
       {/* Background Soft Blobs */}
       <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-accent-teal/5 blur-[120px]" />
       
-      <motion.div 
+      <m.div 
         className="max-w-7xl mx-auto px-6 relative z-10"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -172,7 +173,7 @@ export default function Services() {
               : 'lg:col-span-1';
 
             return (
-              <motion.div
+              <m.div
                 key={service.id}
                 className={`${colSpanClass} rounded-[2rem] p-8 glass-card border border-white/30 hover:border-secondary/35 hover:-translate-y-2 cursor-pointer relative overflow-hidden transition-all duration-500`}
                 onClick={() => setActiveService(service)}
@@ -230,7 +231,7 @@ export default function Services() {
                     opacity: hoveredIndex === index ? 0.8 : 0
                   }}
                 />
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
@@ -238,7 +239,7 @@ export default function Services() {
         {/* Centered Modal with High Z-Index Glassmorphism Backdrop */}
         <AnimatePresence>
           {activeService && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -246,7 +247,7 @@ export default function Services() {
               className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
             >
               {/* Modal Container */}
-              <motion.div
+              <m.div
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
@@ -291,11 +292,13 @@ export default function Services() {
                       <h4 className="text-xs font-bold text-primary uppercase tracking-widest mb-4">
                         Clinical Before & After Comparison
                       </h4>
-                      <BeforeAfterSlider 
-                        beforeImage={activeService.beforeImage} 
-                        afterImage={activeService.afterImage} 
-                        serviceName={activeService.title} 
-                      />
+                      <React.Suspense fallback={<div className="h-40 flex items-center justify-center text-primary/40 text-sm font-light">Loading slider...</div>}>
+                        <BeforeAfterSlider 
+                          beforeImage={activeService.beforeImage} 
+                          afterImage={activeService.afterImage} 
+                          serviceName={activeService.title} 
+                        />
+                      </React.Suspense>
                     </div>
                   )}
 
@@ -356,12 +359,12 @@ export default function Services() {
                     <span className="transition-transform duration-300 group-hover:translate-x-1.5 font-sans font-normal">→</span>
                   </button>
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
         </AnimatePresence>
 
-      </motion.div>
+      </m.div>
     </section>
   );
 }

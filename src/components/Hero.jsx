@@ -1,7 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Phone, Calendar, Star, ShieldCheck, HeartPulse, Award } from 'lucide-react';
-import clinicHero from '../assets/clinic-hero.png';
 
 export default function Hero() {
   const containerVariants = {
@@ -52,14 +51,14 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10 w-full">
         
         {/* Left Side Content */}
-        <motion.div 
+        <m.div 
           className="lg:col-span-7 flex flex-col items-start text-left"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           {/* Trust rating pill */}
-          <motion.div 
+          <m.div 
             variants={itemVariants}
             className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/[0.03] border border-primary/10 backdrop-blur-md mb-6"
           >
@@ -69,10 +68,10 @@ export default function Hero() {
               ))}
             </div>
             <span className="text-xs font-semibold text-primary/80">85 All 5-Star Google Reviews</span>
-          </motion.div>
+          </m.div>
 
           {/* Main Heading */}
-          <motion.h1 
+          <m.h1 
             variants={itemVariants}
             className="text-[2.2rem] sm:text-[3.2rem] md:text-[4rem] lg:text-[4.8rem] leading-[1.12] font-bold font-serif text-primary mb-6"
           >
@@ -80,18 +79,18 @@ export default function Hero() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-accent-teal">
               Aesthetic Dentistry
             </span>
-          </motion.h1>
+          </m.h1>
 
           {/* Description */}
-          <motion.p 
+          <m.p 
             variants={itemVariants}
             className="text-base sm:text-lg text-primary/70 max-w-xl mb-10 leading-relaxed font-sans font-light"
           >
             Welcome to Dr. Khushwaha's Medi-Tooth Dental Clinic. We combine advanced clinical technology with aesthetic artistry to craft your perfect, confident smile.
-          </motion.p>
+          </m.p>
 
           {/* Action CTAs */}
-          <motion.div 
+          <m.div 
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-12"
           >
@@ -113,10 +112,10 @@ export default function Hero() {
               <Phone className="w-4.5 h-4.5 text-secondary" />
               Call 08600 874016
             </a>
-          </motion.div>
+          </m.div>
 
           {/* Trust stats grid */}
-          <motion.div 
+          <m.div 
             variants={itemVariants}
             className="grid grid-cols-3 gap-6 sm:gap-10 border-t border-primary/10 pt-8 w-full max-w-lg"
           >
@@ -138,11 +137,11 @@ export default function Hero() {
               </span>
               <span className="text-xs text-primary/60 mt-1">Aesthetic Fellow</span>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
         {/* Right Side Parallax Visual & Overlapping Appt Card */}
-        <motion.div 
+        <m.div 
           className="lg:col-span-5 relative mt-8 lg:mt-0 flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -155,15 +154,17 @@ export default function Hero() {
           <div className="relative rounded-[2.5rem] overflow-hidden w-full max-w-[440px] aspect-[4/5] shadow-premium z-10 border border-white/20">
             <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent z-10 mix-blend-multiply" />
             <img 
-              src={clinicHero} 
+              src="/medi-tooth-clinic-interior.webp" 
               alt="Dr. Khushwaha's Dental Clinic Modern Interior - Reception Area in Nalasopara East"
               loading="eager"
+              width="440"
+              height="550"
               className="w-full h-full object-cover transition-transform duration-[4s] hover:scale-105"
             />
           </div>
 
           {/* Floating Glassmorphic Appointment Card */}
-          <motion.div 
+          <m.div 
             className="absolute bottom-6 -left-6 sm:-left-12 z-20 max-w-[280px] p-5 rounded-3xl glass-panel shadow-glass-lg border border-white/40 flex items-start gap-4 cursor-pointer hover:bg-white/65 hover:scale-[1.03] transition-all duration-300"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -192,9 +193,9 @@ export default function Hero() {
                 Trusted Specialist
               </div>
             </div>
-          </motion.div>
+          </m.div>
           
-          <motion.div 
+          <m.div 
             className="absolute -top-6 -right-4 z-20 p-4 rounded-full glass-panel shadow-glass border border-white/50 flex items-center justify-center"
             initial={{ scale: 0, opacity: 0, y: 0 }}
             animate={{ 
@@ -209,9 +210,9 @@ export default function Hero() {
             }}
           >
             <HeartPulse className="w-6 h-6 text-accent-teal animate-pulse" />
-          </motion.div>
+          </m.div>
 
-        </motion.div>
+        </m.div>
 
       </div>
     </section>
